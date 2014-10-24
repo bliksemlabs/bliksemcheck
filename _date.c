@@ -43,7 +43,7 @@ char* maandnaam[] =
 char *maandnaam_kort[]= { "jan","feb","mrt","apr","mei","jun","jul","aug","sep","okt","nov","dec"};
 
 
-char *dagnaam[] = 
+char *dagnaam[] =
 {
   "zondag",
   "maandag",
@@ -77,7 +77,7 @@ char* maandnaam_eng[] =
 };
 
 
-char *dagnaam_eng[] = 
+char *dagnaam_eng[] =
 {
   "Sunday",
   "Monday",

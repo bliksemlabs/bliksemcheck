@@ -19,7 +19,7 @@ typedef struct
 	AULONG   m_DefSize;
 	AULONG   m_EltSize;
 	AUBYTE  *m_Elt;
-	void (*remove_functie) (void * elt); 
+	void (*remove_functie) (void * elt);
 } CArray;
 
 AULONG  _CountCArray     (CArray *ca);
@@ -39,4 +39,4 @@ void _SetFreeFunctie(CArray * ca,void (*fn) (void * elt));
 }
 #endif
 
-#endif
+#endif /* _RTREE_ARRAY_H_ */

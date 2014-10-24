@@ -101,12 +101,12 @@ AULONG _GetIndexCArray(CArray *ca, AUBYTE *elt)
 
 	int    displacement;
 	AULONG index;
-	
+
 	displacement = ( elt - ca->m_Elt );
 
 	if ( displacement < 0 )
 		return 0;
-	
+
 	index = displacement / ca->m_EltSize;
 
 	if ( index > ca->m_Count )

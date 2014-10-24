@@ -27,7 +27,7 @@
 
    CREATION DATE
       Tue Aug 29 16:22:20 MES 1995
-   
+
    RCS
       $Id: _get_opt.h,v 1.1 2014/09/23 11:01:57 risedpij Exp $
  */

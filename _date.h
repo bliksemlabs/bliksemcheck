@@ -10,7 +10,7 @@ extern "C" {
 #define days_1970_to_refyear   7305
 
 extern AUWORD  _datum_naar_dag(int jaar, int maand, int dag);
-extern void   _dag_naar_datum(int dgnr, int *weekdag, int *dag, 
+extern void   _dag_naar_datum(int dgnr, int *weekdag, int *dag,
                              int *maand, int *jaar);
 
 
@@ -22,4 +22,4 @@ extern int schrikkel_dagen[12];
 }
 #endif
 
-#endif   /* F_DATE */
+#endif /* F_DATE */

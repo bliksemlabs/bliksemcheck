@@ -15,4 +15,4 @@ typedef int            BOOL;
 #define FALSE	0
 #endif
 
-#endif
+#endif /* STDTYPE_DEFINED */

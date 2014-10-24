@@ -1,11 +1,11 @@
-//-s 20140728 -e 20140831 -r xmldirectory -m meetboekdirectory -h 127.0.0.1 -g 5432 -d ridprod -u rid -p password 
+//-s 20140728 -e 20140831 -r xmldirectory -m meetboekdirectory -h 127.0.0.1 -g 5432 -d ridprod -u rid -p password
 
 #define LOGVIRTUALSEPARATE // log virtual services seperate (not really an error)
 #undef  SKIPSPECIFICDATA   // skip AVV, NS, TEC
 #undef  PRINTDAYNUMBER     // add daynumber next to date
 #undef  ARRDEP             // add arrivals and departures
 #undef  USEUTF8            // uses database default UTF8 in xml, else ISO-8552-1
-#undef  VERSIONTIMESTAMP   // uses version.timestamp 
+#undef  VERSIONTIMESTAMP   // uses version.timestamp
 
 // AVACON1 prereads valid availableconditionday, filters notinuse availablecondition (saving runtime memory use)
 //!AVACON1 reads all availablecondition, but does not store availableconditionday at all
@@ -30,7 +30,7 @@
 #define JOURNEYSTATUS_NO_AVAILABILITYCONDITION  11
 #define JOURNEYSTATUS_NO_DESTINATIONDISPLAY     12
 #define JOURNEYSTATUS_NO_STOPPOINT              13
-#define JOURNEYSTATUS_NO_ASCENDINGTIMES         14 
+#define JOURNEYSTATUS_NO_ASCENDINGTIMES         14
 #define JOURNEYSTATUS_NO_VERSION                15
 #define JOURNEYSTATUS_NO_DATASOURCE             16
 #define JOURNEYSTATUS_NO_STOPPLACE              17
@@ -112,7 +112,7 @@ static CArray *passengerstopassignment_data = NULL;
 static int nrof_passengerstopassignment = 0;
 
 // -----------------------------------------------
-// STOPPLACEPASSENGERGROUP = vertaallijst bliksem 
+// STOPPLACEPASSENGERGROUP = vertaallijst bliksem
 // is er niet???
 // -----------------------------------------------
 typedef struct
@@ -791,7 +791,7 @@ char *iffdate(char *yyyymmdd_in)
 {
 	static char ddmmyyyy_out[8+1];
 	ddmmyyyy_out[8] = '\0';
-	
+
 	ddmmyyyy_out[4] = yyyymmdd_in[0];
 	ddmmyyyy_out[5] = yyyymmdd_in[1];
 	ddmmyyyy_out[6] = yyyymmdd_in[2];
@@ -811,7 +811,7 @@ char *dagnr2datum(int dagnr)
 	_dag_naar_datum (dagnr, &wkdg, &dg, &mnd, &jr);
 
 	//sprintf(buffer, "%02d-%02d-%04d", dg, mnd, jr);
-	sprintf(buffer, "%04d-%02d-%02d", jr, mnd, dg); 
+	sprintf(buffer, "%04d-%02d-%02d", jr, mnd, dg);
 
 	return buffer;
 }
@@ -1033,7 +1033,7 @@ char * stringrecode ( char * Naam )
 
 
 // -----------------------------------------
-// Close connection to database 
+// Close connection to database
 // -----------------------------------------
 void CloseConn(PGconn *conn)
 {
@@ -1041,7 +1041,7 @@ void CloseConn(PGconn *conn)
 }
 
 // -----------------------------------------
-// Establish connection to database 
+// Establish connection to database
 // -----------------------------------------
 PGconn *ConnectDB()
 {
@@ -1199,7 +1199,7 @@ void writewindowinfo(FILE *fp, FILE *fplist, char *filename, char *mainelement, 
 			}
 			ptr++;
 		}
-	
+
 		fprintf(fplist,  "  <report>\n");
 		fprintf(fplist,  "    <file>%s</file>\n", xmlencode(copyptr));
 		fprintf(fplist,  "    <description>%s</description>\n", xmlencode(description));
@@ -1252,7 +1252,7 @@ void printreportinfo(char *filename, int nr, char *label)
 		}
 		ptr++;
 	}
-	
+
 	printf("- %-30.30s  %6d %s\n", copyptr, nr, label);
 }
 
@@ -1325,7 +1325,7 @@ int main (int argc, char **argv)
 		speedcatBOAT[i] = 0;
 	}
 
-	for (i=0; i<JOURNEYSTATUS_TOTAL+1; i++) 
+	for (i=0; i<JOURNEYSTATUS_TOTAL+1; i++)
 	{
 		journeys_skipped_counter[i] = 0;
 	}
@@ -1337,15 +1337,15 @@ int main (int argc, char **argv)
 	strcpy (data_port,     "5432");
 	strcpy (startdatein, "");
 	strcpy (enddatein, "");
-	
+
 	strcpy (data_meetboek, "");
 
 	operator_key.operator_id                = NULL;
 	passengerstopassignment_key.oldstopcode = NULL;
 
-	while ((opt = _get_opt (argc, argv, "s:e:r:d:u:p:h:g:m:?")) != EOF) 
+	while ((opt = _get_opt (argc, argv, "s:e:r:d:u:p:h:g:m:?")) != EOF)
 	{
-		switch(opt) 
+		switch(opt)
 		{
 			case 's':
 			strcpy (startdatein, opt_arg);
@@ -1353,8 +1353,8 @@ int main (int argc, char **argv)
 
 			case 'e':
 			strcpy (enddatein, opt_arg);
-			break;			
-			
+			break;
+
 			case 'r':
 			strcpy (data_xml_directory, opt_arg);
 			break;
@@ -1449,7 +1449,7 @@ int main (int argc, char **argv)
 
 		for (k=0; k<7;k++)
 		{
-			overallweekdays[k]=0; 
+			overallweekdays[k]=0;
 		}
 		for (k=0; k<footnotelength; k++)
 		{
@@ -1751,7 +1751,7 @@ int main (int argc, char **argv)
 		}
 	}
 
-	// prepare fields for combiloop 
+	// prepare fields for combiloop
 	// -----------------------------------------------------
 	// loop through JOURNEY
 	// add destinationdisplayref, publiccode + extra fields
@@ -1980,7 +1980,7 @@ int main (int argc, char **argv)
 
 			journey_progress1 = journey_start + pointintimedemandgroup_ptr->totaldrivetime;
 			journey_progress2 = journey_start + pointintimedemandgroup_ptr->totaldrivetime + pointintimedemandgroup_ptr->stopwaittime;
-			
+
 			time1 = time2 = ((journey_progress1 / 3600) * 100) + ((journey_progress1 % 3600) / 60);
 			if (journey_progress1 != journey_progress2) time2 = ((journey_progress2 / 3600) * 100) + ((journey_progress2 % 3600) / 60);
 
@@ -1999,13 +1999,13 @@ int main (int argc, char **argv)
 			if (stoppoint_ptr->_rosettaerror1 && stoppoint_ptr->isScheduled == TRUE)
 			{
 //				journey_ptr->_status = JOURNEYSTATUS_NO_QUAY;
-//				printf("%s,%s\n", stoppoint_ptr->operator_id, stoppoint_ptr->name); 
+//				printf("%s,%s\n", stoppoint_ptr->operator_id, stoppoint_ptr->name);
 //				continue;
 			}
 			if (stoppoint_ptr->_rosettaerror2 && stoppoint_ptr->isScheduled == TRUE)
 			{
 //				journey_ptr->_status = JOURNEYSTATUS_NO_STOPPLACE;
-//				printf("%s,%s\n", stoppoint_ptr->operator_id, stoppoint_ptr->name); 
+//				printf("%s,%s\n", stoppoint_ptr->operator_id, stoppoint_ptr->name);
 //				continue;
 			}
 		}
@@ -2303,7 +2303,7 @@ actdaystouched = 0;
 			int klm;
 			for (klm=0; klm<footnotelength;klm++)
 			{
-				if (availabilitycondition_ptr->_vector[klm] == '1') 
+				if (availabilitycondition_ptr->_vector[klm] == '1')
 				{
 					operator_ptr->days[klm] = operator_ptr->days[klm] + 1;
 					datasource_ptr->days[klm] = datasource_ptr->days[klm] + 1;
@@ -2415,7 +2415,7 @@ actdaystouched = 0;
 			{
 				POINTINTIMEDEMANDGROUP *pointintimedemandgroup_testptr =  (POINTINTIMEDEMANDGROUP *) _GetCArray (pointintimedemandgroup_data, startk+ktest);
 				POINTINJOURNEYPATTERN  *pointinjourneypattern_ptr      =  (POINTINJOURNEYPATTERN  *) _GetCArray (pointinjourneypattern_data,  startj+ktest);
-				
+
 				int dist = pointinjourneypattern_ptr->distancefromstartroute;
 			}
 */
@@ -2473,15 +2473,15 @@ actdaystouched = 0;
 				int klm;
 				for (klm=0; klm<footnotelength;klm++)
 				{
-					if (availabilitycondition_ptr->_vector[klm] == '1') 
+					if (availabilitycondition_ptr->_vector[klm] == '1')
 					{
 						stoppoint_ptr->_vector[klm] = '1';
 					}
-					if (passengerstopassignment_ptr != NULL && availabilitycondition_ptr->_vector[klm] == '1') 
+					if (passengerstopassignment_ptr != NULL && availabilitycondition_ptr->_vector[klm] == '1')
 					{
 						passengerstopassignment_ptr->_vector[klm] = '1';
 					}
-					if (passengerstopassignment_ptr != NULL && availabilitycondition_ptr->_vector[klm] == '1') 
+					if (passengerstopassignment_ptr != NULL && availabilitycondition_ptr->_vector[klm] == '1')
 					{
 						passengerstopassignment_ptr->_vector[klm] = '1';
 					}
@@ -2499,25 +2499,25 @@ actdaystouched = 0;
 
 			journey_progress1 = journey_start + pointintimedemandgroup_ptr->totaldrivetime;
 			journey_progress2 = journey_start + pointintimedemandgroup_ptr->totaldrivetime + pointintimedemandgroup_ptr->stopwaittime;
-			
+
 			time1 = time2 = ((journey_progress1 / 3600) * 100) + ((journey_progress1 % 3600) / 60);
 			if (journey_progress1 != journey_progress2)
 			{
 				time2 = ((journey_progress2 / 3600) * 100) + ((journey_progress2 % 3600) / 60);
 			}
 
-			if (j==0) 
+			if (j==0)
 			{
 				// departure
 #ifdef ARRDEP
 				stoppoint_ptr->_departures++;
 				if (passengerstopassignment_ptr != NULL)
 				{
-					passengerstopassignment_ptr->_departures++; 
+					passengerstopassignment_ptr->_departures++;
 				}
 				if (passengerstopassignment_ptr != NULL)
 				{
-					passengerstopassignment_ptr->_departures++; 
+					passengerstopassignment_ptr->_departures++;
 				}
 #endif
 				continue;
@@ -2527,13 +2527,13 @@ actdaystouched = 0;
 				// arrrival
 #ifdef ARRDEP
 				stoppoint_ptr->_arrivals++;
-				if (passengerstopassignment_ptr != NULL) 
+				if (passengerstopassignment_ptr != NULL)
 				{
-					passengerstopassignment_ptr->_arrivals++; 
+					passengerstopassignment_ptr->_arrivals++;
 				}
-				if (passengerstopassignment_ptr != NULL) 
+				if (passengerstopassignment_ptr != NULL)
 				{
-					passengerstopassignment_ptr->_arrivals++; 
+					passengerstopassignment_ptr->_arrivals++;
 				}
 #endif
 				continue;
@@ -2549,13 +2549,13 @@ actdaystouched = 0;
 			stoppoint_ptr->_departures++;
 			if (passengerstopassignment_ptr != NULL)
 			{
-				passengerstopassignment_ptr->_arrivals++; 
-				passengerstopassignment_ptr->_departures++; 
+				passengerstopassignment_ptr->_arrivals++;
+				passengerstopassignment_ptr->_departures++;
 			}
 			if (passengerstopassignment_ptr != NULL)
 			{
-				passengerstopassignment_ptr->_arrivals++; 
-				passengerstopassignment_ptr->_departures++; 
+				passengerstopassignment_ptr->_arrivals++;
+				passengerstopassignment_ptr->_departures++;
 			}
 #endif
 		}
@@ -2672,7 +2672,7 @@ actdaystouched = 0;
 		fprintf(fp,  "<table><name>%s</name><count>%8d</count></table>\n", "DestinationDisplay",     nrofdestinationdisplay);
 		fprintf(fp,  "<table><name>%s</name><count>%8d</count></table>\n", "Route",                  nrofroute);
 		fprintf(fp,  "<table><name>%s</name><count>%8d</count></table>\n", "PointInRoute",           nrofpointinroute);
-		
+
 		fprintf(fp,  "<table><name>%s</name><count>%8d</count></table>\n", "Line",                   nrofline);
 		fprintf(fp,  "<table><name>%s</name><count>%8d</count></table>\n", "Operator",               nrofoperator);
 
@@ -2746,7 +2746,7 @@ actdaystouched = 0;
 			fprintf(fp, "    <days>\n");
 			if (operator_ptr)
 			{
-				int k; 
+				int k;
 				for (k=0; k<footnotelength; k++)
 				{
 					fprintf(fp, "      <day>");
@@ -2902,7 +2902,7 @@ actdaystouched = 0;
 			fprintf(fp, "    <days>\n");
 			if (datasource_ptr)
 			{
-				int k; 
+				int k;
 				for (k=0; k<footnotelength; k++)
 				{
 					fprintf(fp, "      <day>");
@@ -2955,7 +2955,7 @@ actdaystouched = 0;
 
 		for (i=0; i<nrofdatasource; i++)
 		{
-			int k; 
+			int k;
 			int activedays = 0;
 			int inactivedays = 0;
 			DATASOURCE *datasource_ptr =  (DATASOURCE *) _GetCArray (datasource_data, i);
@@ -3032,7 +3032,7 @@ actdaystouched = 0;
 		for (i=0; i<nrofdatasource; i++)
 		{
 			DATASOURCE *datasource_ptr =  (DATASOURCE *) _GetCArray (datasource_data, i);
-			if (datasource_ptr && (int) strlen(xmlencode(datasource_ptr->operator_id)) > maxlencode) 
+			if (datasource_ptr && (int) strlen(xmlencode(datasource_ptr->operator_id)) > maxlencode)
 			{
 				maxlencode = (int) strlen(xmlencode(datasource_ptr->operator_id));
 			}
@@ -3058,18 +3058,18 @@ actdaystouched = 0;
 				int klm;
 				for (klm=0; klm<footnotelength;klm++)
 				{
-					if (version_ptr->_vector[klm] == '1') 
+					if (version_ptr->_vector[klm] == '1')
 					{
 						version_ptr->_nrofvaliddays++;
 					}
 				}
 			}
 
-			if (version_ptr->_nrofvaliddays == 0) 
+			if (version_ptr->_nrofvaliddays == 0)
 			{
 				continue;
 			}
-			
+
 			fprintf(fp, "<version>");
 			fprintf(fp, "<datasource>%-*.*s</datasource>", maxlencode, maxlencode, datasource_ptr?xmlencode(datasource_ptr->operator_id):"_");
 			fprintf(fp, "<version_id>%03ld</version_id>",  version_ptr->id);
@@ -3120,7 +3120,7 @@ actdaystouched = 0;
 
 		for (i=0; i<MAXSPEED; i++)
 		{
-			if (speedcat[i] > 0) 
+			if (speedcat[i] > 0)
 			{
 				fprintf(fp, "  <speedcount>");
 				fprintf(fp, "<speed>%03d</speed>", i);
@@ -3146,7 +3146,7 @@ actdaystouched = 0;
 		fprintf(fp, "        <xs:element name='lowspeedjourney' maxOccurs='unbounded' minOccurs='0'>\n");
 		fprintf(fp, "          <xs:complexType>\n");
 		fprintf(fp, "            <xs:sequence>\n");
-		fprintf(fp, "              <xs:element type='speed'      name='speed'/>\n"); 
+		fprintf(fp, "              <xs:element type='speed'      name='speed'/>\n");
 		fprintf(fp, "              <xs:element type='xs:integer' name='meters'/>\n");
 		fprintf(fp, "              <xs:element type='xs:integer' name='seconds'/>\n");
 		fprintf(fp, "              <xs:element type='xs:string'  name='journey'/>\n");
@@ -3211,7 +3211,7 @@ actdaystouched = 0;
 		fprintf(fp, "        <xs:element name='speedjourney' maxOccurs='unbounded' minOccurs='0'>\n");
 		fprintf(fp, "          <xs:complexType>\n");
 		fprintf(fp, "            <xs:sequence>\n");
-		fprintf(fp, "              <xs:element type='speed'      name='speed'/>\n"); 
+		fprintf(fp, "              <xs:element type='speed'      name='speed'/>\n");
 		fprintf(fp, "              <xs:element type='xs:integer' name='meters'/>\n");
 		fprintf(fp, "              <xs:element type='xs:integer' name='seconds'/>\n");
 		fprintf(fp, "              <xs:element type='xs:string'  name='journey'/>\n");
@@ -3334,7 +3334,7 @@ actdaystouched = 0;
 			}
 			fprintf(fp, "    </speedcounts>\n");
 			fprintf(fp, "  </productcategory>\n");
-		}	
+		}
 		fprintf(fp, "</productcategoryspeedcounts>\n");
 
 		printreportinfo(filename, nrofxmlitems, "speedcounts");
@@ -3488,7 +3488,7 @@ actdaystouched = 0;
 			fprintf(fp, "    <productcategoryname>%s</productcategoryname>\n", productcategory_ptr->name?stringrecode(xmlencode(productcategory_ptr->name)):"");
 			fprintf(fp, "    <nrofjourneys>%d</nrofjourneys>\n", productcategory_ptr->_nrofjourneys);
 			fprintf(fp, "  </productcategory>\n");
-		}	
+		}
 		fprintf(fp, "</productcategories>\n");
 
 		printreportinfo(filename, nrofxmlitems, "productcategories");
@@ -3548,7 +3548,7 @@ actdaystouched = 0;
 			fprintf(fp, "    <productcategoryshortname>%s</productcategoryshortname>\n", productcategory_ptr->shortname?stringrecode(xmlencode(productcategory_ptr->shortname)):"");
 			fprintf(fp, "    <productcategoryname>%s</productcategoryname>\n", productcategory_ptr->name?stringrecode(xmlencode(productcategory_ptr->name)):"");
 			fprintf(fp, "  </productcategory>\n");
-		}	
+		}
 		fprintf(fp, "</productcategories>\n");
 		printreportinfo(filename, nrofxmlitems, "productcategories");
 		fclose(fp);
@@ -3690,7 +3690,7 @@ actdaystouched = 0;
 		for (i=0; i<nrofstoppoint; i++)
 		{
 			STOPPOINT *stoppoint_ptr =  (STOPPOINT *) _GetCArray (stoppoint_data, i);
-			if (stoppoint_ptr && (int) strlen(stoppoint_ptr->name) > maxlenname) 
+			if (stoppoint_ptr && (int) strlen(stoppoint_ptr->name) > maxlenname)
 			{
 				maxlenname = (int) strlen(stoppoint_ptr->name);
 			}
@@ -3814,7 +3814,7 @@ actdaystouched = 0;
 
 				for (k=0; k<7;k++)
 				{
-					day[k]=0; 
+					day[k]=0;
 				}
 				for (k=0; k<footnotelength; k++)
 				{
@@ -3866,7 +3866,7 @@ actdaystouched = 0;
 
 				for (k=0; k<footnotelength; k++)
 				{
-					if (tempvector[k] == '1') 
+					if (tempvector[k] == '1')
 					{
 						stoparea_ptr->_vector[k] = '1';
 					}
@@ -3991,7 +3991,7 @@ actdaystouched = 0;
 
 					for (k=0; k<7;k++)
 					{
-						day[k]=0; 
+						day[k]=0;
 					}
 
 					for (k=0; k<footnotelength; k++)
@@ -4005,7 +4005,7 @@ actdaystouched = 0;
 					quays_ptr = NULL;
 					if (quays_data && _CountCArray(quays_data) > 0)
 					{
-						if (quays_key.quaycode == NULL) 
+						if (quays_key.quaycode == NULL)
 						{
 							quays_key.quaycode = (char *) malloc(255+1);
 						}
@@ -4202,7 +4202,7 @@ actdaystouched = 0;
 					int kweekday = getweekday(overallstartday);
 					for (k=0; k<7;k++)
 					{
-						day[k]=0; 
+						day[k]=0;
 					}
 
 					for (k=0; k<footnotelength; k++)
@@ -4216,7 +4216,7 @@ actdaystouched = 0;
 					stopplaces_ptr = NULL;
 					if (stopplaces_data && _CountCArray(stopplaces_data) > 0)
 					{
-						if (stopplaces_key.stopplacecode == NULL) 
+						if (stopplaces_key.stopplacecode == NULL)
 						{
 							stopplaces_key.stopplacecode = (char *) malloc(255+1);
 						}
@@ -4224,7 +4224,7 @@ actdaystouched = 0;
 
 						stopplaces_ptr = (STOPPLACES *) _BSearchCArray (stopplaces_data, &stopplaces_key, stopplaces_cmp);
 
-						if (stopplaces_ptr) 
+						if (stopplaces_ptr)
 						{
 							stopplaces_ptr->_touched = temptouched;
 						}
@@ -4364,11 +4364,11 @@ actdaystouched = 0;
 		for (i=0; i<nrofstoparea; i++)
 		{
 			STOPAREA *stoparea_ptr =  (STOPAREA *) _GetCArray (stoparea_data, i);
-			if (stoparea_ptr && (int) strlen(xmlencode(stoparea_ptr->name))        > maxlenname) 
+			if (stoparea_ptr && (int) strlen(xmlencode(stoparea_ptr->name))        > maxlenname)
 			{
 				maxlenname = (int) strlen(xmlencode(stoparea_ptr->name));
 			}
-			if (stoparea_ptr && (int) strlen(xmlencode(stoparea_ptr->operator_id)) > maxlencode) 
+			if (stoparea_ptr && (int) strlen(xmlencode(stoparea_ptr->operator_id)) > maxlencode)
 			{
 				maxlencode = (int) strlen(xmlencode(stoparea_ptr->operator_id));
 			}
@@ -4381,13 +4381,13 @@ actdaystouched = 0;
 			if (stoparea_ptr)
 			{
 				int day[7];
-				int k; 
+				int k;
 				int kweekday = getweekday(overallstartday);
 				int codefiller = maxlencode - (int) strlen(xmlencode(stoparea_ptr->operator_id)) + 1;
 				int namefiller = maxlenname - (int) strlen(xmlencode(stoparea_ptr->name)) + 1;
 				for (k=0; k<7;k++)
 				{
-					day[k]=0; 
+					day[k]=0;
 				}
 
 				for (k=0; k<footnotelength; k++)
@@ -4456,7 +4456,7 @@ actdaystouched = 0;
 			AVAILABILITYCONDITION    availabilitycondition_key, *availabilitycondition_ptr;
 			BC_VERSION                  version_key, *version_ptr;
 
-			if (journey_ptr->_status == JOURNEYSTATUS_OK) 
+			if (journey_ptr->_status == JOURNEYSTATUS_OK)
 			{
 				continue;
 			}
@@ -4469,7 +4469,7 @@ actdaystouched = 0;
 #endif
 
 #ifdef LOGVIRTUALSEPARATE
-			if (journey_ptr->_status == JOURNEYSTATUS_VIRTUAL) 
+			if (journey_ptr->_status == JOURNEYSTATUS_VIRTUAL)
 			{
 				continue;
 			}
@@ -4521,7 +4521,7 @@ actdaystouched = 0;
 			fprintf(fp, "    <id>%ld</id>", journey_ptr->id);
 			fprintf(fp, "  </journey>\n");
 			nrofxmlitems++;
-		}	
+		}
 		fprintf(fp, "</skippedjourneys>\n");
 		printreportinfo(filename, nrofxmlitems, "skippedjourneys");
 		fclose(fp);
@@ -4605,7 +4605,7 @@ actdaystouched = 0;
 			fprintf(fp, "    <id>%ld</id>", journey_ptr->id);
 			fprintf(fp, "  </journey>\n");
 			nrofxmlitems++;
-		}	
+		}
 		fprintf(fp, "</virtualjourneys>\n");
 		printreportinfo(filename, nrofxmlitems, "virtualjourneys");
 		fclose(fp);
@@ -4639,7 +4639,7 @@ static char *addtopool(char *in)
 	{
 		return NULL;
 	}
-	if (strlen(in) == 0) 
+	if (strlen(in) == 0)
 	{
 		return NULL;
 	}
@@ -4747,7 +4747,7 @@ int FetchPassengerStopAssignmentFile()
 	// --------------------------------------
 	passengerstopassignment_data = _MakeCArray (preread, 10, sizeof (PASSENGERSTOPASSIGNMENT));
 
-	fp = fopen (filename, "r"); 
+	fp = fopen (filename, "r");
 
 	headerread = FALSE;
 
@@ -4760,7 +4760,7 @@ int FetchPassengerStopAssignmentFile()
 			headerread = TRUE;
 			continue;
 		}
-		memset((void *) &passengerstopassignment_in, 0, sizeof(PASSENGERSTOPASSIGNMENT)); 
+		memset((void *) &passengerstopassignment_in, 0, sizeof(PASSENGERSTOPASSIGNMENT));
 
 		// ARR|10000030 becomes ARR:10000030
 		dataptr = read_kv1_next_record (databuffer, datafield);
@@ -4783,7 +4783,7 @@ int FetchPassengerStopAssignmentFile()
 
 		if (stopplacepassengergroup_data && _CountCArray(stopplacepassengergroup_data) > 0)
 		{
-			if (stopplacepassengergroup_key.stopcode == NULL) 
+			if (stopplacepassengergroup_key.stopcode == NULL)
 			{
 				stopplacepassengergroup_key.stopcode = (char *) malloc(255+1);
 			}
@@ -4831,7 +4831,7 @@ int FetchStopPlacePassengerGroupFile()
 	sprintf(filename, "%s/stopplacepassengergroup.csv", data_meetboek);
 
 	fp = fopen (filename, "r");
-	
+
 	if (fp == NULL)
 	{
 		return 0;
@@ -4849,7 +4849,7 @@ int FetchStopPlacePassengerGroupFile()
 	// --------------------------------------
 	stopplacepassengergroup_data = _MakeCArray (preread, 10, sizeof (STOPPLACEPASSENGERGROUP));
 
-	fp = fopen (filename, "r"); 
+	fp = fopen (filename, "r");
 
 	while (fgets(databuffer, MAXIOBUF, fp)!=NULL)
 	{
@@ -4858,7 +4858,7 @@ int FetchStopPlacePassengerGroupFile()
 			headerread = TRUE;
 			continue;
 		}
-		memset((void *) &stopplacepassengergroup_in, 0, sizeof(STOPPLACEPASSENGERGROUP)); 
+		memset((void *) &stopplacepassengergroup_in, 0, sizeof(STOPPLACEPASSENGERGROUP));
 
 		dataptr = read_kv1_next_record (databuffer, datafield);
 		stopplacepassengergroup_in.clustercode =        addtopool(datafield);
@@ -4896,7 +4896,7 @@ int FetchQuaysFile()
 	sprintf(filename, "%s/quays.csv", data_meetboek);
 
 	fp = fopen (filename, "r");
-	
+
 	if (fp == NULL)
 	{
 		return 0;
@@ -4914,7 +4914,7 @@ int FetchQuaysFile()
 	// --------------------------------------
 	quays_data = _MakeCArray (preread, 10, sizeof (QUAYS));
 
-	fp = fopen (filename, "r"); 
+	fp = fopen (filename, "r");
 
 	while (fgets(databuffer, MAXIOBUF*8, fp)!=NULL)
 	{
@@ -4923,7 +4923,7 @@ int FetchQuaysFile()
 			headerread = TRUE;
 			continue;
 		}
-		memset((void *) &quays_in, 0, sizeof(QUAYS)); 
+		memset((void *) &quays_in, 0, sizeof(QUAYS));
 
 		dataptr = read_kv1_next_record (databuffer, datafield); // ova
 
@@ -5039,7 +5039,7 @@ int FetchStopPlacesFile()
 	sprintf(filename, "%s/stopplaces.csv", data_meetboek);
 
 	fp = fopen (filename, "r");
-	
+
 	if (fp == NULL)
 	{
 		return 0;
@@ -5057,7 +5057,7 @@ int FetchStopPlacesFile()
 	// --------------------------------------
 	stopplaces_data = _MakeCArray (preread, 10, sizeof (STOPPLACES));
 
-	fp = fopen (filename, "r"); 
+	fp = fopen (filename, "r");
 
 	while (fgets(databuffer, MAXIOBUF*8, fp)!=NULL)
 	{
@@ -5066,7 +5066,7 @@ int FetchStopPlacesFile()
 			headerread = TRUE;
 			continue;
 		}
-		memset((void *) &stopplaces_in, 0, sizeof(STOPPLACES)); 
+		memset((void *) &stopplaces_in, 0, sizeof(STOPPLACES));
 
 		dataptr = read_kv1_next_record (databuffer, datafield); // stopplacecode
 		stopplaces_in.stopplacecode =     addtopool(datafield);
@@ -5122,7 +5122,7 @@ int FetchPassengerStopAssignment(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -5137,9 +5137,9 @@ int FetchPassengerStopAssignment(PGconn *conn)
 	// --------------------------------------
 	// declare cursor
 	// --------------------------------------
-	
+
 	res = PQexec(conn, "DECLARE c_passengerstopassignment CURSOR FOR select operator_id, quaycode from passengerstopassignment");
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR FetchPassengerStopAssignment failed\n");
@@ -5172,7 +5172,7 @@ int FetchPassengerStopAssignment(PGconn *conn)
 
 	for (i = 0; i < nRows; i++)
 	{
-		memset((void *) &passengerstopassignment_in, 0, sizeof(PASSENGERSTOPASSIGNMENT)); 
+		memset((void *) &passengerstopassignment_in, 0, sizeof(PASSENGERSTOPASSIGNMENT));
 
 		passengerstopassignment_in.oldstopcode = addtopool(PQgetvalue(res, i, 0)); // operator_id
 		passengerstopassignment_in.newstopcode = addtopool(PQgetvalue(res, i, 1)); // quaycode
@@ -5187,7 +5187,7 @@ int FetchPassengerStopAssignment(PGconn *conn)
 
 		if (stopplacepassengergroup_data && _CountCArray(stopplacepassengergroup_data) > 0)
 		{
-			if (stopplacepassengergroup_key.stopcode == NULL) 
+			if (stopplacepassengergroup_key.stopcode == NULL)
 			{
 				stopplacepassengergroup_key.stopcode = (char *) malloc(255+1);
 			}
@@ -5207,7 +5207,7 @@ int FetchPassengerStopAssignment(PGconn *conn)
 
 		_AddCArray (passengerstopassignment_data, (AUBYTE *) &passengerstopassignment_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (passengerstopassignment_data, passengerstopassignment_cmp);
@@ -5245,7 +5245,7 @@ int FetchStopPlacePassengerGroup(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -5260,10 +5260,10 @@ int FetchStopPlacePassengerGroup(PGconn *conn)
 	// --------------------------------------
 	// declare cursor
 	// --------------------------------------
-	
+
 //	res = PQexec(conn, "DECLARE c_stopplacepassengergroup CURSOR FOR SELECT DISTINCT ON (stopplacecode,quaycode) StopPlaceCode, quaycode FROM quays_wouter WHERE getingetout::boolean"); //todo
 	res = PQexec(conn, "DECLARE c_stopplacepassengergroup CURSOR FOR select stopplacecode, quaycode from stopplacepassengergroup");
-	
+
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
@@ -5297,14 +5297,14 @@ int FetchStopPlacePassengerGroup(PGconn *conn)
 
 	for (i = 0; i < nRows; i++)
 	{
-		memset((void *) &stopplacepassengergroup_in, 0, sizeof(STOPPLACEPASSENGERGROUP)); 
+		memset((void *) &stopplacepassengergroup_in, 0, sizeof(STOPPLACEPASSENGERGROUP));
 
 		stopplacepassengergroup_in.clustercode = addtopool(PQgetvalue(res, i, 0));
 		stopplacepassengergroup_in.stopcode    = addtopool(PQgetvalue(res, i, 1));
 
 		_AddCArray (stopplacepassengergroup_data, (AUBYTE *) &stopplacepassengergroup_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (stopplacepassengergroup_data, stopplacepassengergroup_cmp);
@@ -5340,7 +5340,7 @@ int FetchQuays(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -5355,9 +5355,9 @@ int FetchQuays(PGconn *conn)
 	// --------------------------------------
 	// declare cursor
 	// --------------------------------------
-	
+
 	res = PQexec(conn, "DECLARE c_quays CURSOR FOR SELECT quaycode, haltenaam from quays");
-	
+
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
@@ -5391,7 +5391,7 @@ int FetchQuays(PGconn *conn)
 
 	for (i = 0; i < nRows; i++)
 	{
-		memset((void *) &quays_in, 0, sizeof(QUAYS)); 
+		memset((void *) &quays_in, 0, sizeof(QUAYS));
 
 		quays_in.quaycode  = addtopool(PQgetvalue(res, i, 0));
 		quays_in.haltenaam = addtopool(PQgetvalue(res, i, 1));
@@ -5400,7 +5400,7 @@ int FetchQuays(PGconn *conn)
 
 		_AddCArray (quays_data, (AUBYTE *) &quays_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (quays_data, quays_cmp);
@@ -5436,7 +5436,7 @@ int FetchStopPlaces(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -5451,9 +5451,9 @@ int FetchStopPlaces(PGconn *conn)
 	// --------------------------------------
 	// declare cursor
 	// --------------------------------------
-	
+
 	res = PQexec(conn, "DECLARE c_stopplaces CURSOR FOR SELECT stopplacecode, publicname from stopplaces");
-	
+
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
@@ -5487,7 +5487,7 @@ int FetchStopPlaces(PGconn *conn)
 
 	for (i = 0; i < nRows; i++)
 	{
-		memset((void *) &stopplaces_in, 0, sizeof(STOPPLACES)); 
+		memset((void *) &stopplaces_in, 0, sizeof(STOPPLACES));
 
 		stopplaces_in.stopplacecode  = addtopool(PQgetvalue(res, i, 0));
 		stopplaces_in.publicname     = addtopool(PQgetvalue(res, i, 1));
@@ -5496,7 +5496,7 @@ int FetchStopPlaces(PGconn *conn)
 
 		_AddCArray (stopplaces_data, (AUBYTE *) &stopplaces_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (stopplaces_data, stopplaces_cmp);
@@ -5533,7 +5533,7 @@ int FetchOperator(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	 res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -5548,9 +5548,9 @@ int FetchOperator(PGconn *conn)
 	// --------------------------------------
 	// declare cursor
 	// --------------------------------------
-	
+
 	res = PQexec(conn, "DECLARE c_operator CURSOR FOR select id, operator_id, name from operator");
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR FetchOperator failed\n");
@@ -5584,7 +5584,7 @@ int FetchOperator(PGconn *conn)
 
 	for (i = 0; i < nRows; i++)
 	{
-		memset((void *) &operator_in, 0, sizeof(OPERATOR)); 
+		memset((void *) &operator_in, 0, sizeof(OPERATOR));
 
 		operator_in.id =                        atoi(PQgetvalue(res, i, 0));
 		operator_in.operator_id =          addtopool(PQgetvalue(res, i, 1));
@@ -5637,7 +5637,7 @@ int FetchDataSource(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	 res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -5652,9 +5652,9 @@ int FetchDataSource(PGconn *conn)
 	// --------------------------------------
 	// declare cursor
 	// --------------------------------------
-	
+
 	res = PQexec(conn, "DECLARE c_datasource CURSOR FOR select id, operator_id, name from datasource");
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR FetchDataSource failed\n");
@@ -5687,7 +5687,7 @@ int FetchDataSource(PGconn *conn)
 
 	for (i = 0; i < nRows; i++)
 	{
-		memset((void *) &datasource_in, 0, sizeof(DATASOURCE)); 
+		memset((void *) &datasource_in, 0, sizeof(DATASOURCE));
 
 		datasource_in.id =                        atoi(PQgetvalue(res, i, 0));
 		datasource_in.operator_id =          addtopool(PQgetvalue(res, i, 1));
@@ -5704,7 +5704,7 @@ int FetchDataSource(PGconn *conn)
 
 		_AddCArray (datasource_data, (AUBYTE *) &datasource_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (datasource_data, datasource_cmp);
@@ -5744,7 +5744,7 @@ int FetchStopPoint(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -5760,7 +5760,7 @@ int FetchStopPoint(PGconn *conn)
 	// declare cursor
 	// --------------------------------------
 	res = PQexec(conn, "DECLARE c_stoppoint CURSOR FOR select id, operator_id, isScheduled, stopareaRef, name, rd_x, rd_y, restrictedmobilitysuitable from stoppoint");
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR FetchStopPoint failed\n");
@@ -5793,7 +5793,7 @@ int FetchStopPoint(PGconn *conn)
 
 	for (i = 0; i < nRows; i++)
 	{
-		memset((void *) &stoppoint_in, 0, sizeof(STOPPOINT)); 
+		memset((void *) &stoppoint_in, 0, sizeof(STOPPOINT));
 
 		stoppoint_in.id =                         atol(PQgetvalue(res, i,  0));
 		stoppoint_in.operator_id =           addtopool(PQgetvalue(res, i,  1));
@@ -5825,7 +5825,7 @@ int FetchStopPoint(PGconn *conn)
 
 		if (passengerstopassignment_data && _CountCArray(passengerstopassignment_data) > 0)
 		{
-			if (passengerstopassignment_key.oldstopcode == NULL) 
+			if (passengerstopassignment_key.oldstopcode == NULL)
 			{
 				passengerstopassignment_key.oldstopcode = (char *) malloc(255+1);
 			}
@@ -5857,7 +5857,7 @@ int FetchStopPoint(PGconn *conn)
 
 		_AddCArray (stoppoint_data, (AUBYTE *) &stoppoint_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (stoppoint_data, stoppoint_cmp);
@@ -5895,7 +5895,7 @@ int FetchStopArea(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -5911,7 +5911,7 @@ int FetchStopArea(PGconn *conn)
 	// declare cursor
 	// --------------------------------------
 	res = PQexec(conn, "DECLARE c_stoparea CURSOR FOR select id, operator_id, name from stoparea");
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR FetchStopArea failed\n");
@@ -5944,7 +5944,7 @@ int FetchStopArea(PGconn *conn)
 
 	for (i = 0; i < nRows; i++)
 	{
-		memset((void *) &stoparea_in, 0, sizeof(STOPAREA)); 
+		memset((void *) &stoparea_in, 0, sizeof(STOPAREA));
 
 		stoparea_in.id =                         atol(PQgetvalue(res, i,  0));
 		stoparea_in.operator_id =           addtopool(PQgetvalue(res, i,  1));
@@ -5959,7 +5959,7 @@ int FetchStopArea(PGconn *conn)
 
 		_AddCArray (stoparea_data, (AUBYTE *) &stoparea_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (stoparea_data, stoparea_cmp);
@@ -5995,7 +5995,7 @@ int FetchProductCategory(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -6011,7 +6011,7 @@ int FetchProductCategory(PGconn *conn)
 	// declare cursor
 	// --------------------------------------
 	res = PQexec(conn, "DECLARE c_productcategory CURSOR FOR select id, operator_id, shortname, name from productCategory");
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR FetchProductCategory failed\n");
@@ -6044,7 +6044,7 @@ int FetchProductCategory(PGconn *conn)
 
 	for (i = 0; i < nRows; i++)
 	{
-		memset((void *) &productcategory_in, 0, sizeof(PRODUCTCATEGORY)); 
+		memset((void *) &productcategory_in, 0, sizeof(PRODUCTCATEGORY));
 
 		productcategory_in.id =                        atol(PQgetvalue(res, i,  0));
 		productcategory_in.operator_id =          addtopool(PQgetvalue(res, i,  1));
@@ -6064,7 +6064,7 @@ int FetchProductCategory(PGconn *conn)
 		}
 		_AddCArray (productcategory_data, (AUBYTE *) &productcategory_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (productcategory_data, productcategory_cmp);
@@ -6100,7 +6100,7 @@ int FetchJourneyPattern(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -6150,7 +6150,7 @@ int FetchJourneyPattern(PGconn *conn)
 
 	for (i = 0; i < nRows; i++)
 	{
-		memset((void *) &journeypattern_in, 0, sizeof(JOURNEYPATTERN)); 
+		memset((void *) &journeypattern_in, 0, sizeof(JOURNEYPATTERN));
 
 		journeypattern_in.id =                        atol(PQgetvalue(res, i,  0));
 		journeypattern_in.routeref =                  atoi(PQgetvalue(res, i,  1));
@@ -6161,7 +6161,7 @@ int FetchJourneyPattern(PGconn *conn)
 
 		_AddCArray (journeypattern_data, (AUBYTE *) &journeypattern_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (journeypattern_data, journeypattern_cmp);
@@ -6200,7 +6200,7 @@ int FetchJourney(PGconn *conn, int nrofjourney)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -6218,7 +6218,7 @@ int FetchJourney(PGconn *conn, int nrofjourney)
 	sprintf(cursorbuffer, "DECLARE c_journey CURSOR FOR select id, operator_id, availabilityconditionRef, journeypatternref, timedemandgroupref, productCategoryRef, departuretime, name, lowfloor, hasLiftOrRamp, isvirtual  from Journey");
 
 	res = PQexec(conn, cursorbuffer);
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR FetchJourney failed\n");
@@ -6227,7 +6227,7 @@ int FetchJourney(PGconn *conn, int nrofjourney)
 	}
 
 	PQclear(res);
-	
+
 	// --------------------------------------
 	// fetch rows
 	// --------------------------------------
@@ -6254,7 +6254,7 @@ int FetchJourney(PGconn *conn, int nrofjourney)
 	{
 		AVAILABILITYCONDITION    availabilitycondition_key, *availabilitycondition_ptr;
 		EMPTYAVAILABILITYCONDITION    emptyavailabilitycondition_key, *emptyavailabilitycondition_ptr;
-		memset((void *) &journey_in, 0, sizeof(JOURNEY)); 
+		memset((void *) &journey_in, 0, sizeof(JOURNEY));
 
 		journey_in.id =                       atol(PQgetvalue(res, i,  0));
 		journey_in.operator_id =         addtopool(PQgetvalue(res, i,  1));
@@ -6306,7 +6306,7 @@ int FetchJourney(PGconn *conn, int nrofjourney)
 
 		_AddCArray (journey_data, (AUBYTE *) &journey_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (journey_data, journey_cmp);
@@ -6344,7 +6344,7 @@ int FetchPointInJourneyPattern(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -6369,7 +6369,7 @@ int FetchPointInJourneyPattern(PGconn *conn)
 	}
 
 	PQclear(res);
-	
+
 	// --------------------------------------
 	// fetch rows
 	// --------------------------------------
@@ -6393,7 +6393,7 @@ int FetchPointInJourneyPattern(PGconn *conn)
 
 	for (i = 0; i < nRows; i++)
 	{
-		memset((void *) &pointinjourneypattern_in, 0, sizeof(POINTINJOURNEYPATTERN)); 
+		memset((void *) &pointinjourneypattern_in, 0, sizeof(POINTINJOURNEYPATTERN));
 		pointinjourneypattern_in.journeypatternref =         atoi(PQgetvalue(res, i,  0));
 		pointinjourneypattern_in.pointorder =                atoi(PQgetvalue(res, i,  1));
 		pointinjourneypattern_in.pointref =                  atoi(PQgetvalue(res, i,  2));
@@ -6417,7 +6417,7 @@ int FetchPointInJourneyPattern(PGconn *conn)
 
 		_AddCArray (pointinjourneypattern_data, (AUBYTE *) &pointinjourneypattern_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (pointinjourneypattern_data, pointinjourneypattern_cmp);
@@ -6458,7 +6458,7 @@ int FetchAvailabilityCondition(PGconn *conn, int nrofvalidavailabilitycondition)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -6484,7 +6484,7 @@ int FetchAvailabilityCondition(PGconn *conn, int nrofvalidavailabilitycondition)
 	}
 
 	PQclear(res);
-	
+
 	// --------------------------------------
 	// fetch rows
 	// --------------------------------------
@@ -6512,7 +6512,7 @@ int FetchAvailabilityCondition(PGconn *conn, int nrofvalidavailabilitycondition)
 	for (i = 0; i < nRows; i++)
 	{
 		char field[255+1];
-		memset((void *) &availabilitycondition_in, 0, sizeof(AVAILABILITYCONDITION)); 
+		memset((void *) &availabilitycondition_in, 0, sizeof(AVAILABILITYCONDITION));
 		availabilitycondition_in.id =                        atoi(PQgetvalue(res, i,  0));
 
 		availabilityconditionday_key.availabilityconditionRef = availabilitycondition_in.id;
@@ -6520,16 +6520,16 @@ int FetchAvailabilityCondition(PGconn *conn, int nrofvalidavailabilitycondition)
 		availabilityconditionday_ptr = (AVAILABILITYCONDITIONDAY *) _BSearchCArray (availabilityconditionday_data, &availabilityconditionday_key, availabilityconditiondaypart_cmp);
 		if (availabilityconditionday_ptr == NULL)
 		{
-			memset((void *) &emptyavailabilitycondition_in, 0, sizeof(EMPTYAVAILABILITYCONDITION)); 
+			memset((void *) &emptyavailabilitycondition_in, 0, sizeof(EMPTYAVAILABILITYCONDITION));
 			emptyavailabilitycondition_in.id = availabilitycondition_in.id;
 			_AddCArray (emptyavailabilitycondition_data, (AUBYTE *) &emptyavailabilitycondition_in);
 			addedemptyRows++;
 			continue;
 		}
 
-		availabilitycondition_in.id         =                atoi(PQgetvalue(res, i,  0));	
+		availabilitycondition_in.id         =                atoi(PQgetvalue(res, i,  0));
 		strcpy(field,                                             PQgetvalue(res, i,  1));	// operator_id
-		availabilitycondition_in.versionRef =                atoi(PQgetvalue(res, i,  2));	
+		availabilitycondition_in.versionRef =                atoi(PQgetvalue(res, i,  2));
 
 		availabilitycondition_in._datasourcecode     = addtopool(isolateoperatorkey(field));
 		availabilitycondition_in._datasourcesubcode  = addtopool(isolateoperatorsubkey(field));
@@ -6556,7 +6556,7 @@ int FetchAvailabilityCondition(PGconn *conn, int nrofvalidavailabilitycondition)
 		_AddCArray (availabilitycondition_data, (AUBYTE *) &availabilitycondition_in);
 		addedRows++;
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (availabilitycondition_data, availabilitycondition_cmp);
@@ -6631,7 +6631,7 @@ int FetchAvailabilityConditionDay(PGconn *conn, int nrofavailabilityconditionday
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -6647,7 +6647,7 @@ int FetchAvailabilityConditionDay(PGconn *conn, int nrofavailabilityconditionday
 	// declare cursor
 	// --------------------------------------
 	res = PQexec(conn, "DECLARE c_availabilityconditionday CURSOR FOR select availabilityconditionRef, validdate, isavailable from AvailabilityConditionDay");
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR FetchAvailabilityConditionDay failed\n");
@@ -6656,7 +6656,7 @@ int FetchAvailabilityConditionDay(PGconn *conn, int nrofavailabilityconditionday
 	}
 
 	PQclear(res);
-	
+
 	// --------------------------------------
 	// fetch rows
 	// --------------------------------------
@@ -6682,10 +6682,10 @@ int FetchAvailabilityConditionDay(PGconn *conn, int nrofavailabilityconditionday
 	{
 		int thisday;
 
-		memset((void *) &availabilityconditionday_in, 0, sizeof(AVAILABILITYCONDITIONDAY)); 
+		memset((void *) &availabilityconditionday_in, 0, sizeof(AVAILABILITYCONDITIONDAY));
 		availabilityconditionday_in.availabilityconditionRef =  atoi(PQgetvalue(res, i,  0));
 		availabilityconditionday_in._validdaynumber =    datum2dagnr(PQgetvalue(res, i,  1));
-		if (!(PQgetvalue(res, i,  2)[0] == 't')) 
+		if (!(PQgetvalue(res, i,  2)[0] == 't'))
 		{
 			continue; // (!isavailable)
 		}
@@ -6703,7 +6703,7 @@ int FetchAvailabilityConditionDay(PGconn *conn, int nrofavailabilityconditionday
 
 		_AddCArray (availabilityconditionday_data, (AUBYTE *) &availabilityconditionday_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (availabilityconditionday_data, availabilityconditionday_cmp);
@@ -6739,7 +6739,7 @@ int FetchAvailabilityCondition2(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -6765,7 +6765,7 @@ int FetchAvailabilityCondition2(PGconn *conn)
 	}
 
 	PQclear(res);
-	
+
 	// --------------------------------------
 	// fetch rows
 	// --------------------------------------
@@ -6793,18 +6793,18 @@ int FetchAvailabilityCondition2(PGconn *conn)
 	for (i = 0; i < nRows; i++)
 	{
 		char field[255+1];
-		memset((void *) &availabilitycondition_in, 0, sizeof(AVAILABILITYCONDITION)); 
+		memset((void *) &availabilitycondition_in, 0, sizeof(AVAILABILITYCONDITION));
 
-		availabilitycondition_in.id         =                atoi(PQgetvalue(res, i,  0));	
+		availabilitycondition_in.id         =                atoi(PQgetvalue(res, i,  0));
 		strcpy(field,                                             PQgetvalue(res, i,  1));	// operator_id
-		availabilitycondition_in.versionRef =                atoi(PQgetvalue(res, i,  2));	
+		availabilitycondition_in.versionRef =                atoi(PQgetvalue(res, i,  2));
 
 		availabilitycondition_in._vector = NULL; // addtopool(emptyvector);
 		availabilitycondition_in._nrofvaliddays = 0;
 
 		_AddCArray (availabilitycondition_data, (AUBYTE *) &availabilitycondition_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (availabilitycondition_data, availabilitycondition_cmp);
@@ -6840,7 +6840,7 @@ int FetchAvailabilityConditionDay2(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -6856,7 +6856,7 @@ int FetchAvailabilityConditionDay2(PGconn *conn)
 	// declare cursor
 	// --------------------------------------
 	res = PQexec(conn, "DECLARE c_availabilityconditionday CURSOR FOR select availabilityconditionRef, validdate, isavailable from AvailabilityConditionDay");
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR FetchAvailabilityConditionDay2 failed\n");
@@ -6865,7 +6865,7 @@ int FetchAvailabilityConditionDay2(PGconn *conn)
 	}
 
 	PQclear(res);
-	
+
 	// --------------------------------------
 	// fetch rows
 	// --------------------------------------
@@ -6897,10 +6897,10 @@ int FetchAvailabilityConditionDay2(PGconn *conn)
 			availabilitycondition_key.id = -1;
 		}
 
-		memset((void *) &availabilityconditionday_in, 0, sizeof(AVAILABILITYCONDITIONDAY)); 
+		memset((void *) &availabilityconditionday_in, 0, sizeof(AVAILABILITYCONDITIONDAY));
 		availabilityconditionday_in.availabilityconditionRef =  atoi(PQgetvalue(res, i,  0));
 		availabilityconditionday_in._validdaynumber =    datum2dagnr(PQgetvalue(res, i,  1));
-		if (!(PQgetvalue(res, i,  2)[0] == 't')) 
+		if (!(PQgetvalue(res, i,  2)[0] == 't'))
 		{
 			continue; // (!isavailable)
 		}
@@ -6943,7 +6943,7 @@ int FetchAvailabilityConditionDay2(PGconn *conn)
 			availabilitycondition_ptr->_nrofvaliddays++;
 		}
 	}
-	
+
 	PQclear(res);
 
 	// --------------------------------------
@@ -6978,7 +6978,7 @@ int FetchPointInTimeDemandGroup(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -7003,7 +7003,7 @@ int FetchPointInTimeDemandGroup(PGconn *conn)
 	}
 
 	PQclear(res);
-	
+
 	// --------------------------------------
 	// fetch rows
 	// --------------------------------------
@@ -7027,7 +7027,7 @@ int FetchPointInTimeDemandGroup(PGconn *conn)
 
 	for (i = 0; i < nRows; i++)
 	{
-		memset((void *) &pointintimedemandgroup_in, 0, sizeof(POINTINTIMEDEMANDGROUP)); 
+		memset((void *) &pointintimedemandgroup_in, 0, sizeof(POINTINTIMEDEMANDGROUP));
 		pointintimedemandgroup_in.timedemandgroupref =        atoi(PQgetvalue(res, i,  0));
 		pointintimedemandgroup_in.pointorder =                atoi(PQgetvalue(res, i,  1));
 		pointintimedemandgroup_in.totaldrivetime =            atoi(PQgetvalue(res, i,  2));
@@ -7049,7 +7049,7 @@ int FetchPointInTimeDemandGroup(PGconn *conn)
 
 		_AddCArray (pointintimedemandgroup_data, (AUBYTE *) &pointintimedemandgroup_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (pointintimedemandgroup_data, pointintimedemandgroup_cmp);
@@ -7071,7 +7071,7 @@ int FetchPointInTimeDemandGroup(PGconn *conn)
 			{
 				timedemandgroup_key.id = pointintimedemandgroup_ptr->timedemandgroupref;
 				timedemandgroup_ptr = (TIMEDEMANDGROUP *) _BSearchCArray (timedemandgroup_data, &timedemandgroup_key, timedemandgroup_cmp);
-				if (timedemandgroup_ptr != NULL) 
+				if (timedemandgroup_ptr != NULL)
 				{
 					timedemandgroup_ptr->_ascendingtimes = FALSE;
 				}
@@ -7111,7 +7111,7 @@ int FetchTimeDemandGroup(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -7128,7 +7128,7 @@ int FetchTimeDemandGroup(PGconn *conn)
 	// --------------------------------------
 
 	res = PQexec(conn, "DECLARE c_timedemandgroup CURSOR FOR select id from TimeDemandGroup");
- 
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR FetchTimeDemandGroup failed\n");
@@ -7137,7 +7137,7 @@ int FetchTimeDemandGroup(PGconn *conn)
 	}
 
 	PQclear(res);
-	
+
 	// --------------------------------------
 	// fetch rows
 	// --------------------------------------
@@ -7161,7 +7161,7 @@ int FetchTimeDemandGroup(PGconn *conn)
 
 	for (i = 0; i < nRows; i++)
 	{
-		memset((void *) &timedemandgroup_in, 0, sizeof(TIMEDEMANDGROUP)); 
+		memset((void *) &timedemandgroup_in, 0, sizeof(TIMEDEMANDGROUP));
 		timedemandgroup_in.id =                        atol(PQgetvalue(res, i,  0));
 
 		timedemandgroup_in._lowestpointorder = -1;
@@ -7170,7 +7170,7 @@ int FetchTimeDemandGroup(PGconn *conn)
 
 		_AddCArray (timedemandgroup_data, (AUBYTE *) &timedemandgroup_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (timedemandgroup_data, timedemandgroup_cmp);
@@ -7207,7 +7207,7 @@ int FetchDestinationDisplay(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -7224,7 +7224,7 @@ int FetchDestinationDisplay(PGconn *conn)
 	// --------------------------------------
 
 	res = PQexec(conn, "DECLARE c_destinationdisplay CURSOR FOR select id, name from DestinationDisplay");
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR FetchDestinationDisplay failed\n");
@@ -7233,7 +7233,7 @@ int FetchDestinationDisplay(PGconn *conn)
 	}
 
 	PQclear(res);
-	
+
 	// --------------------------------------
 	// fetch rows
 	// --------------------------------------
@@ -7257,13 +7257,13 @@ int FetchDestinationDisplay(PGconn *conn)
 
 	for (i = 0; i < nRows; i++)
 	{
-		memset((void *) &destinationdisplay_in, 0, sizeof(DESTINATIONDISPLAY)); 
+		memset((void *) &destinationdisplay_in, 0, sizeof(DESTINATIONDISPLAY));
 		destinationdisplay_in.id =                        atol(PQgetvalue(res, i,  0));
 		destinationdisplay_in.name =                 addtopool(PQgetvalue(res, i,  1));
 
 		_AddCArray (destinationdisplay_data, (AUBYTE *) &destinationdisplay_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (destinationdisplay_data, destinationdisplay_cmp);
@@ -7299,7 +7299,7 @@ int FetchRoute(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -7316,7 +7316,7 @@ int FetchRoute(PGconn *conn)
 	// --------------------------------------
 
 	res = PQexec(conn, "DECLARE c_route CURSOR FOR select id, lineref from Route");
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR FetchRoute failed\n");
@@ -7325,7 +7325,7 @@ int FetchRoute(PGconn *conn)
 	}
 
 	PQclear(res);
-	
+
 	// --------------------------------------
 	// fetch rows
 	// --------------------------------------
@@ -7349,13 +7349,13 @@ int FetchRoute(PGconn *conn)
 
 	for (i = 0; i < nRows; i++)
 	{
-		memset((void *) &route_in, 0, sizeof(ROUTE)); 
+		memset((void *) &route_in, 0, sizeof(ROUTE));
 		route_in.id =                        atol(PQgetvalue(res, i,  0));
 		route_in.lineref =                   atoi(PQgetvalue(res, i,  1));
 
 		_AddCArray (route_data, (AUBYTE *) &route_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (route_data, route_cmp);
@@ -7391,7 +7391,7 @@ int FetchPointInRoute(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -7408,7 +7408,7 @@ int FetchPointInRoute(PGconn *conn)
 	// --------------------------------------
 
 	res = PQexec(conn, "DECLARE c_pointinroute CURSOR FOR select routeref, pointorder from PointInRoute");
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR FetchPointInRoute failed\n");
@@ -7417,7 +7417,7 @@ int FetchPointInRoute(PGconn *conn)
 	}
 
 	PQclear(res);
-	
+
 	// --------------------------------------
 	// fetch rows
 	// --------------------------------------
@@ -7442,13 +7442,13 @@ int FetchPointInRoute(PGconn *conn)
 
 	for (i = 0; i < nRows; i++)
 	{
-		memset((void *) &pointinroute_in, 0, sizeof(ROUTE)); 
+		memset((void *) &pointinroute_in, 0, sizeof(ROUTE));
 		pointinroute_in.routeref =                     atol(PQgetvalue(res, i,  0));
 		pointinroute_in.pointorder =                   atoi(PQgetvalue(res, i,  1));
 
 		_AddCArray (pointinroute_data, (AUBYTE *) &pointinroute_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (pointinroute_data, pointinroute_cmp);
@@ -7484,7 +7484,7 @@ int FetchLine(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -7501,7 +7501,7 @@ int FetchLine(PGconn *conn)
 	// --------------------------------------
 
 	res = PQexec(conn, "DECLARE c_line CURSOR FOR select id, operatorref, publiccode, TransportMode from Line");
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR FetchLine failed\n");
@@ -7510,7 +7510,7 @@ int FetchLine(PGconn *conn)
 	}
 
 	PQclear(res);
-	
+
 	// --------------------------------------
 	// fetch rows
 	// --------------------------------------
@@ -7534,7 +7534,7 @@ int FetchLine(PGconn *conn)
 
 	for (i = 0; i < nRows; i++)
 	{
-		memset((void *) &line_in, 0, sizeof(LINE)); 
+		memset((void *) &line_in, 0, sizeof(LINE));
 		line_in.id =                          atol(PQgetvalue(res, i,  0));
 		line_in.operatorref =                 atoi(PQgetvalue(res, i,  1));
 		line_in.publiccode =             addtopool(PQgetvalue(res, i,  2));
@@ -7542,7 +7542,7 @@ int FetchLine(PGconn *conn)
 
 		_AddCArray (line_data, (AUBYTE *) &line_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (line_data, line_cmp);
@@ -7578,7 +7578,7 @@ int FetchVersion(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -7599,7 +7599,7 @@ int FetchVersion(PGconn *conn)
 #else
 	res = PQexec(conn, "DECLARE c_version CURSOR FOR select  id, operator_id, datasourceRef, startdate, enddate, description from Version");
 #endif
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR FetchVersion failed\n");
@@ -7608,7 +7608,7 @@ int FetchVersion(PGconn *conn)
 	}
 
 	PQclear(res);
-	
+
 	// --------------------------------------
 	// fetch rows
 	// --------------------------------------
@@ -7632,7 +7632,7 @@ int FetchVersion(PGconn *conn)
 
 	for (i = 0; i < nRows; i++)
 	{
-		memset((void *) &version_in, 0, sizeof(BC_VERSION)); 
+		memset((void *) &version_in, 0, sizeof(BC_VERSION));
 		version_in.id =                          atol(PQgetvalue(res, i,  0));
 		version_in.operator_id =            addtopool(PQgetvalue(res, i,  1));
 		version_in.datasourceRef =               atoi(PQgetvalue(res, i,  2));
@@ -7653,7 +7653,7 @@ int FetchVersion(PGconn *conn)
 
 		_AddCArray (version_data, (AUBYTE *) &version_in);
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (version_data, version_cmp);
@@ -7702,7 +7702,7 @@ int CountTimeDemandGroup(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -7717,9 +7717,9 @@ int CountTimeDemandGroup(PGconn *conn)
 	// --------------------------------------
 	// declare cursor
 	// --------------------------------------
- 
+
 	res = PQexec(conn, "DECLARE c_timedemandgroup CURSOR FOR select id from TimeDemandGroup");
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR CountTimeDemandGroup failed\n");
@@ -7728,7 +7728,7 @@ int CountTimeDemandGroup(PGconn *conn)
 	}
 
 	PQclear(res);
-	
+
 	// --------------------------------------
 	// fetch rows
 	// --------------------------------------
@@ -7763,9 +7763,9 @@ int CountTimeDemandGroup(PGconn *conn)
 			continue;
 		}
 		nrfound++;
-		
+
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (journey_data, journey_cmp);
@@ -7801,7 +7801,7 @@ int CountJourneyPattern(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -7817,7 +7817,7 @@ int CountJourneyPattern(PGconn *conn)
 	// declare cursor
 	// --------------------------------------
 	res = PQexec(conn, "DECLARE c_journeypattern CURSOR FOR select id from JourneyPattern");
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR CountJourneyPattern failed\n");
@@ -7856,14 +7856,14 @@ int CountJourneyPattern(PGconn *conn)
 		journey_key.journeypatternref = atol(PQgetvalue(res, i,  0));
 
 		journey_ptr = (JOURNEY *) _BSearchCArray (journey_data, &journey_key, journeyjourneypattern_cmp);
-		if (journey_ptr == NULL) 
+		if (journey_ptr == NULL)
 		{
 			continue;
 		}
 		nrfound++;
-		
+
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (journey_data, journey_cmp);
@@ -7900,7 +7900,7 @@ int CountJourney(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -7917,7 +7917,7 @@ int CountJourney(PGconn *conn)
 	// --------------------------------------
 
 	res = PQexec(conn, "DECLARE c_journey CURSOR FOR select availabilityconditionRef  from Journey");
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR CountJourney failed\n");
@@ -7926,7 +7926,7 @@ int CountJourney(PGconn *conn)
 	}
 
 	PQclear(res);
-	
+
 	// --------------------------------------
 	// fetch rows
 	// --------------------------------------
@@ -7952,7 +7952,7 @@ int CountJourney(PGconn *conn)
 	for (i = 0; i < nRows; i++)
 	{
 		AVAILABILITYCONDITION    availabilitycondition_key, *availabilitycondition_ptr;
-		memset((void *) &journey_in, 0, sizeof(JOURNEY)); 
+		memset((void *) &journey_in, 0, sizeof(JOURNEY));
 
 		// --------------------------------------------
 		// search availabilitycondition
@@ -7983,7 +7983,7 @@ int CountJourney(PGconn *conn)
 
 		nrofinscopejourneys++;
 	}
-	
+
 	PQclear(res);
 
 	// --------------------------------------
@@ -8017,7 +8017,7 @@ int CountPointInJourneyPattern(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -8034,7 +8034,7 @@ int CountPointInJourneyPattern(PGconn *conn)
 	// --------------------------------------
 
 	res = PQexec(conn, "DECLARE c_pointinjourneypattern CURSOR FOR select journeypatternref from PointInJourneyPattern");
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR CountPointInJourneyPattern failed\n");
@@ -8043,7 +8043,7 @@ int CountPointInJourneyPattern(PGconn *conn)
 	}
 
 	PQclear(res);
-	
+
 	// --------------------------------------
 	// fetch rows
 	// --------------------------------------
@@ -8073,14 +8073,14 @@ int CountPointInJourneyPattern(PGconn *conn)
 		journey_key.journeypatternref = atol(PQgetvalue(res, i,  0));
 
 		journey_ptr = (JOURNEY *) _BSearchCArray (journey_data, &journey_key, journeyjourneypattern_cmp);
-		if (journey_ptr == NULL) 
+		if (journey_ptr == NULL)
 		{
 			continue;
 		}
 		nrfound++;
-		
+
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (journey_data, journey_cmp);
@@ -8140,7 +8140,7 @@ int CountAvailabilityConditionDay(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -8157,7 +8157,7 @@ int CountAvailabilityConditionDay(PGconn *conn)
 	// --------------------------------------
 
 	res = PQexec(conn, "DECLARE c_availabilityconditionday CURSOR FOR select validdate, isavailable from AvailabilityConditionDay");
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR CountAvailabilityConditionDay failed\n");
@@ -8166,7 +8166,7 @@ int CountAvailabilityConditionDay(PGconn *conn)
 	}
 
 	PQclear(res);
-	
+
 	// --------------------------------------
 	// fetch rows
 	// --------------------------------------
@@ -8189,11 +8189,11 @@ int CountAvailabilityConditionDay(PGconn *conn)
 	{
 		int thisday;
 
-		memset((void *) &availabilityconditionday_in, 0, sizeof(AVAILABILITYCONDITIONDAY)); 
+		memset((void *) &availabilityconditionday_in, 0, sizeof(AVAILABILITYCONDITIONDAY));
 //		availabilityconditionday_in.validdate =            addtopool(PQgetvalue(res, i,  0));			// kruid
 //		availabilityconditionday_in.isavailable =                    PQgetvalue(res, i,  1)[0] == 't';	// kruid
 
-		if (!(PQgetvalue(res, i,  1)[0] == 't')) 
+		if (!(PQgetvalue(res, i,  1)[0] == 't'))
 		{
 			continue;
 		}
@@ -8207,7 +8207,7 @@ int CountAvailabilityConditionDay(PGconn *conn)
 		}
 
 	}
-	
+
 	PQclear(res);
 
 	// --------------------------------------
@@ -8241,7 +8241,7 @@ int CountPointInTimeDemandGroup(PGconn *conn)
 	// --------------------------------------
 	// Start a transaction block
 	// --------------------------------------
-	
+
 	res  = PQexec(conn, "BEGIN");
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
@@ -8256,9 +8256,9 @@ int CountPointInTimeDemandGroup(PGconn *conn)
 	// --------------------------------------
 	// declare cursor
 	// --------------------------------------
- 
+
 	res = PQexec(conn, "DECLARE c_pointintimedemandgroup CURSOR FOR select timedemandgroupref from PointInTimeDemandGroup");
-	
+
 	if (PQresultStatus(res) != PGRES_COMMAND_OK)
 	{
 		printf("DECLARE CURSOR CountPointInTimeDemandGroup failed\n");
@@ -8267,7 +8267,7 @@ int CountPointInTimeDemandGroup(PGconn *conn)
 	}
 
 	PQclear(res);
-	
+
 	// --------------------------------------
 	// fetch rows
 	// --------------------------------------
@@ -8297,14 +8297,14 @@ int CountPointInTimeDemandGroup(PGconn *conn)
 		journey_key.timedemandgroupref = atol(PQgetvalue(res, i,  0));
 
 		journey_ptr = (JOURNEY *) _BSearchCArray (journey_data, &journey_key, journeytimedemandgroup_cmp);
-		if (journey_ptr == NULL) 
+		if (journey_ptr == NULL)
 		{
 			continue;
 		}
 		nrfound++;
-		
+
 	}
-	
+
 	PQclear(res);
 
 	_SortCArray (journey_data, journey_cmp);
@@ -8346,7 +8346,7 @@ static int journey_cmp (const void *e1, const void *e2)
 {
 	JOURNEY *o1 = (JOURNEY *) e1;
 	JOURNEY *o2 = (JOURNEY *) e2;
-	
+
 	int r = strcmp(o1->operator_id, o2->operator_id);
 
 	if (r != 0)
@@ -8361,7 +8361,7 @@ static int journeytimedemandgroup_cmp (const void *e1, const void *e2)
 {
 	JOURNEY *o1 = (JOURNEY *) e1;
 	JOURNEY *o2 = (JOURNEY *) e2;
-	
+
 	int r = o1->timedemandgroupref - o2->timedemandgroupref;
 
 	if (r != 0)
@@ -8376,7 +8376,7 @@ static int journeyjourneypattern_cmp (const void *e1, const void *e2)
 {
 	JOURNEY *o1 = (JOURNEY *) e1;
 	JOURNEY *o2 = (JOURNEY *) e2;
-	
+
 	int r = o1->journeypatternref - o2->journeypatternref;
 
 	if (r != 0)
@@ -8393,7 +8393,7 @@ static int pointinjourneypattern_cmp (const void *e1, const void *e2)
 {
 	POINTINJOURNEYPATTERN *o1 = (POINTINJOURNEYPATTERN *) e1;
 	POINTINJOURNEYPATTERN *o2 = (POINTINJOURNEYPATTERN *) e2;
-	
+
 	int r = o1->journeypatternref - o2->journeypatternref;
 
 	if (r != 0)
@@ -8410,7 +8410,7 @@ static int pointinroute_cmp (const void *e1, const void *e2)
 {
 	POINTINROUTE *o1 = (POINTINROUTE *) e1;
 	POINTINROUTE *o2 = (POINTINROUTE *) e2;
-	
+
 	int r = o1->routeref - o2->routeref;
 
 	if (r != 0)
@@ -8428,7 +8428,7 @@ static int pointintimedemandgroup_cmp (const void *e1, const void *e2)
 {
 	POINTINTIMEDEMANDGROUP *o1 = (POINTINTIMEDEMANDGROUP *) e1;
 	POINTINTIMEDEMANDGROUP *o2 = (POINTINTIMEDEMANDGROUP *) e2;
-	
+
 	int r = o1->timedemandgroupref - o2->timedemandgroupref;
 
 	if (r != 0)
@@ -8445,7 +8445,7 @@ static int stoppoint_cmp (const void *e1, const void *e2)
 {
 	STOPPOINT *o1 = (STOPPOINT *) e1;
 	STOPPOINT *o2 = (STOPPOINT *) e2;
-	
+
 	int r = o1->id - o2->id;
 
 	if (r != 0)
@@ -8460,7 +8460,7 @@ static int stoppointoperatorid_cmp (const void *e1, const void *e2)
 {
 	STOPPOINT *o1 = (STOPPOINT *) e1;
 	STOPPOINT *o2 = (STOPPOINT *) e2;
-	
+
 	int r = strcmp(o1->operator_id, o2->operator_id);
 
 	if (r != 0)
@@ -8475,7 +8475,7 @@ static int availabilitycondition_cmp (const void *e1, const void *e2)
 {
 	AVAILABILITYCONDITION *o1 = (AVAILABILITYCONDITION *) e1;
 	AVAILABILITYCONDITION *o2 = (AVAILABILITYCONDITION *) e2;
-	
+
 	int r = o1->id - o2->id;
 
 	if (r != 0)
@@ -8490,7 +8490,7 @@ static int emptyavailabilitycondition_cmp (const void *e1, const void *e2)
 {
 	EMPTYAVAILABILITYCONDITION *o1 = (EMPTYAVAILABILITYCONDITION *) e1;
 	EMPTYAVAILABILITYCONDITION *o2 = (EMPTYAVAILABILITYCONDITION *) e2;
-	
+
 	int r = o1->id - o2->id;
 
 	if (r != 0)
@@ -8505,7 +8505,7 @@ static int availabilityconditiondatasource_cmp (const void *e1, const void *e2)
 {
 	AVAILABILITYCONDITION *o1 = (AVAILABILITYCONDITION *) e1;
 	AVAILABILITYCONDITION *o2 = (AVAILABILITYCONDITION *) e2;
-	
+
 	int r = strcmp(o1->_datasourcecode, o2->_datasourcecode);
 
 	if (r != 0)
@@ -8528,7 +8528,7 @@ static int availabilityconditionday_cmp (const void *e1, const void *e2)
 {
 	AVAILABILITYCONDITIONDAY *o1 = (AVAILABILITYCONDITIONDAY *) e1;
 	AVAILABILITYCONDITIONDAY *o2 = (AVAILABILITYCONDITIONDAY *) e2;
-	
+
 	int r = o1->availabilityconditionRef - o2->availabilityconditionRef;
 
 	if (r != 0)
@@ -8550,7 +8550,7 @@ static int availabilityconditiondaypart_cmp (const void *e1, const void *e2)
 {
 	AVAILABILITYCONDITIONDAY *o1 = (AVAILABILITYCONDITIONDAY *) e1;
 	AVAILABILITYCONDITIONDAY *o2 = (AVAILABILITYCONDITIONDAY *) e2;
-	
+
 	int r = o1->availabilityconditionRef - o2->availabilityconditionRef;
 
 	if (r != 0)
@@ -8565,7 +8565,7 @@ static int operatoroperatorid_cmp (const void *e1, const void *e2)
 {
 	OPERATOR *o1 = (OPERATOR *) e1;
 	OPERATOR *o2 = (OPERATOR *) e2;
-	
+
 	int r = strcmp(o1->operator_id, o2->operator_id);
 
 	if (r != 0)
@@ -8580,7 +8580,7 @@ static int destinationdisplay_cmp (const void *e1, const void *e2)
 {
 	DESTINATIONDISPLAY *o1 = (DESTINATIONDISPLAY *) e1;
 	DESTINATIONDISPLAY *o2 = (DESTINATIONDISPLAY *) e2;
-	
+
 	int r = o1->id - o2->id;
 
 	if (r != 0)
@@ -8595,7 +8595,7 @@ static int journeypattern_cmp (const void *e1, const void *e2)
 {
 	JOURNEYPATTERN *o1 = (JOURNEYPATTERN *) e1;
 	JOURNEYPATTERN *o2 = (JOURNEYPATTERN *) e2;
-	
+
 	int r = o1->id - o2->id;
 
 	if (r != 0)
@@ -8610,7 +8610,7 @@ static int route_cmp (const void *e1, const void *e2)
 {
 	ROUTE *o1 = (ROUTE *) e1;
 	ROUTE *o2 = (ROUTE *) e2;
-	
+
 	int r = o1->id - o2->id;
 
 	if (r != 0)
@@ -8625,7 +8625,7 @@ static int productcategory_cmp (const void *e1, const void *e2)
 {
 	PRODUCTCATEGORY *o1 = (PRODUCTCATEGORY *) e1;
 	PRODUCTCATEGORY *o2 = (PRODUCTCATEGORY *) e2;
-	
+
 	int r = o1->id - o2->id;
 
 	if (r != 0)
@@ -8640,7 +8640,7 @@ static int line_cmp (const void *e1, const void *e2)
 {
 	LINE *o1 = (LINE *) e1;
 	LINE *o2 = (LINE *) e2;
-	
+
 	int r = o1->id - o2->id;
 
 	if (r != 0)
@@ -8655,7 +8655,7 @@ static int operator_cmp (const void *e1, const void *e2)
 {
 	OPERATOR *o1 = (OPERATOR *) e1;
 	OPERATOR *o2 = (OPERATOR *) e2;
-	
+
 	int r = o1->id - o2->id;
 
 	if (r != 0)
@@ -8670,7 +8670,7 @@ static int version_cmp (const void *e1, const void *e2)
 {
 	BC_VERSION *o1 = (BC_VERSION *) e1;
 	BC_VERSION *o2 = (BC_VERSION *) e2;
-	
+
 	int r = o1->id - o2->id;
 
 	if (r != 0)
@@ -8685,7 +8685,7 @@ static int datasource_cmp (const void *e1, const void *e2)
 {
 	DATASOURCE *o1 = (DATASOURCE *) e1;
 	DATASOURCE *o2 = (DATASOURCE *) e2;
-	
+
 	int r = o1->id - o2->id;
 
 	if (r != 0)
@@ -8700,7 +8700,7 @@ static int stoparea_cmp (const void *e1, const void *e2)
 {
 	STOPAREA *o1 = (STOPAREA *) e1;
 	STOPAREA *o2 = (STOPAREA *) e2;
-	
+
 	int r = o1->id - o2->id;
 
 	if (r != 0)
@@ -8715,7 +8715,7 @@ static int timedemandgroup_cmp (const void *e1, const void *e2)
 {
 	TIMEDEMANDGROUP *o1 = (TIMEDEMANDGROUP *) e1;
 	TIMEDEMANDGROUP *o2 = (TIMEDEMANDGROUP *) e2;
-	
+
 	int r = o1->id - o2->id;
 
 	if (r != 0)
@@ -8730,7 +8730,7 @@ static int passengerstopassignment_cmp (const void *e1, const void *e2)
 {
 	PASSENGERSTOPASSIGNMENT *o1 = (PASSENGERSTOPASSIGNMENT *) e1;
 	PASSENGERSTOPASSIGNMENT *o2 = (PASSENGERSTOPASSIGNMENT *) e2;
-	
+
 	int r = strcmp(o1->oldstopcode, o2->oldstopcode);
 
 	if (r != 0)
@@ -8746,7 +8746,7 @@ static int passengerstopassignmentnew_cmp (const void *e1, const void *e2)
 {
 	PASSENGERSTOPASSIGNMENT *o1 = (PASSENGERSTOPASSIGNMENT *) e1;
 	PASSENGERSTOPASSIGNMENT *o2 = (PASSENGERSTOPASSIGNMENT *) e2;
-	
+
 	int r = strcmp(o1->newstopcode, o2->newstopcode);
 	return (r);
 }
@@ -8755,7 +8755,7 @@ static int passengerstopassignmentnewclustercode_cmp (const void *e1, const void
 {
 	PASSENGERSTOPASSIGNMENT *o1 = (PASSENGERSTOPASSIGNMENT *) e1;
 	PASSENGERSTOPASSIGNMENT *o2 = (PASSENGERSTOPASSIGNMENT *) e2;
-	
+
 	int r = strcmp(o1->newclustercode, o2->newclustercode);
 	return (r);
 }
@@ -8764,7 +8764,7 @@ static int stopplacepassengergroup_cmp (const void *e1, const void *e2)
 {
 	STOPPLACEPASSENGERGROUP *o1 = (STOPPLACEPASSENGERGROUP *) e1;
 	STOPPLACEPASSENGERGROUP *o2 = (STOPPLACEPASSENGERGROUP *) e2;
-	
+
 	int r = strcmp(o1->stopcode, o2->stopcode);
 	return (r);
 }
@@ -8773,7 +8773,7 @@ static int quays_cmp (const void *e1, const void *e2)
 {
 	QUAYS *o1 = (QUAYS *) e1;
 	QUAYS *o2 = (QUAYS *) e2;
-	
+
 	int r = strcmp(o1->quaycode, o2->quaycode);
 	return (r);
 }
@@ -8782,7 +8782,7 @@ static int stopplaces_cmp (const void *e1, const void *e2)
 {
 	STOPPLACES *o1 = (STOPPLACES *) e1;
 	STOPPLACES *o2 = (STOPPLACES *) e2;
-	
+
 	int r = strcmp(o1->stopplacecode, o2->stopplacecode);
 	return (r);
 }

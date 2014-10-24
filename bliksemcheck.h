@@ -12,9 +12,4 @@
 #define FALSE	0
 #endif
 
-
-
-
-
-#endif 
-
+#endif /* __BLIKSEMTOIFF__ */
