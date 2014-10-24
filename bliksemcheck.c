@@ -860,13 +860,13 @@ void increase_skipped_counter(int index)
 void printlog1(char *text, long nrofelements, long memory)
 {
 	int fillsize = 40;
-	printf("%-*.*s : %8d\n", fillsize, fillsize, text, nrofelements);
+	printf("%-*.*s : %8ld\n", fillsize, fillsize, text, nrofelements);
 }
 
 void printlog2(char *text, char *subtext, long nrofelements, long memory)
 {
 	int fillsize = 40;
-	printf("%-*.*s : %8d %s\n", fillsize, fillsize, text, nrofelements, subtext);
+	printf("%-*.*s : %8ld %s\n", fillsize, fillsize, text, nrofelements, subtext);
 }
 
 char vertaalchars(unsigned char c0, unsigned char c1)
@@ -3072,7 +3072,7 @@ actdaystouched = 0;
 			
 			fprintf(fp, "<version>");
 			fprintf(fp, "<datasource>%-*.*s</datasource>", maxlencode, maxlencode, datasource_ptr?xmlencode(datasource_ptr->operator_id):"_");
-			fprintf(fp, "<version_id>%03d</version_id>",   version_ptr->id);
+			fprintf(fp, "<version_id>%03ld</version_id>",  version_ptr->id);
 			fprintf(fp, "<startdate>%s</startdate>",       version_ptr->startdate);
 			fprintf(fp, "<enddate>%s</enddate>",           version_ptr->enddate);
 #ifdef VERSIONTIMESTAMP
@@ -3316,7 +3316,7 @@ actdaystouched = 0;
 #endif
 
 			fprintf(fp, "  <productcategory>\n");
-			fprintf(fp, "    <productcategoryid>%d</productcategoryid>\n", productcategory_ptr->id);
+			fprintf(fp, "    <productcategoryid>%ld</productcategoryid>\n", productcategory_ptr->id);
 			fprintf(fp, "    <productcategoryoperatorid>%s</productcategoryoperatorid>\n", productcategory_ptr->operator_id?xmlencode(productcategory_ptr->operator_id):"");
 			fprintf(fp, "    <productcategoryshortname>%s</productcategoryshortname>\n", productcategory_ptr->shortname?stringrecode(xmlencode(productcategory_ptr->shortname)):"");
 			fprintf(fp, "    <productcategoryname>%s</productcategoryname>\n", productcategory_ptr->name?stringrecode(xmlencode(productcategory_ptr->name)):"");
@@ -3482,7 +3482,7 @@ actdaystouched = 0;
 			nrofxmlitems++;
 
 			fprintf(fp, "  <productcategory>\n");
-			fprintf(fp, "    <productcategoryid>%d</productcategoryid>\n", productcategory_ptr->id);
+			fprintf(fp, "    <productcategoryid>%ld</productcategoryid>\n", productcategory_ptr->id);
 			fprintf(fp, "    <productcategoryoperatorid>%s</productcategoryoperatorid>\n", productcategory_ptr->operator_id?xmlencode(productcategory_ptr->operator_id):"");
 			fprintf(fp, "    <productcategoryshortname>%s</productcategoryshortname>\n", productcategory_ptr->shortname?stringrecode(xmlencode(productcategory_ptr->shortname)):"");
 			fprintf(fp, "    <productcategoryname>%s</productcategoryname>\n", productcategory_ptr->name?stringrecode(xmlencode(productcategory_ptr->name)):"");
@@ -3543,7 +3543,7 @@ actdaystouched = 0;
 			nrofxmlitems++;
 
 			fprintf(fp, "  <productcategory>\n");
-			fprintf(fp, "    <productcategoryid>%d</productcategoryid>\n", productcategory_ptr->id);
+			fprintf(fp, "    <productcategoryid>%ld</productcategoryid>\n", productcategory_ptr->id);
 			fprintf(fp, "    <productcategoryoperatorid>%s</productcategoryoperatorid>\n", productcategory_ptr->operator_id?xmlencode(productcategory_ptr->operator_id):"");
 			fprintf(fp, "    <productcategoryshortname>%s</productcategoryshortname>\n", productcategory_ptr->shortname?stringrecode(xmlencode(productcategory_ptr->shortname)):"");
 			fprintf(fp, "    <productcategoryname>%s</productcategoryname>\n", productcategory_ptr->name?stringrecode(xmlencode(productcategory_ptr->name)):"");
@@ -4518,7 +4518,7 @@ actdaystouched = 0;
 			fprintf(fp, "    <versiondescription>%s</versiondescription>", version_ptr?stringrecode(xmlencode(version_ptr->description)):"_");
 			fprintf(fp, "    <timedemandgroupref>%d</timedemandgroupref>", journey_ptr->timedemandgroupref);
 			fprintf(fp, "    <journeypatternref>%d</journeypatternref>", journey_ptr->journeypatternref);
-			fprintf(fp, "    <id>%d</id>", journey_ptr->id);
+			fprintf(fp, "    <id>%ld</id>", journey_ptr->id);
 			fprintf(fp, "  </journey>\n");
 			nrofxmlitems++;
 		}	
@@ -4602,7 +4602,7 @@ actdaystouched = 0;
 			fprintf(fp, "    <versiondescription>%s</versiondescription>", version_ptr?stringrecode(xmlencode(version_ptr->description)):"_");
 			fprintf(fp, "    <timedemandgroupref>%d</timedemandgroupref>", journey_ptr->timedemandgroupref);
 			fprintf(fp, "    <journeypatternref>%d</journeypatternref>", journey_ptr->journeypatternref);
-			fprintf(fp, "    <id>%d</id>", journey_ptr->id);
+			fprintf(fp, "    <id>%ld</id>", journey_ptr->id);
 			fprintf(fp, "  </journey>\n");
 			nrofxmlitems++;
 		}	
