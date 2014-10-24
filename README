@@ -1,0 +1,16 @@
+- Execute bliksemcheck to test the bliksem database, for options type:
+
+----
+bliksemcheck -v
+----
+
+- This results in a number of xsd- and xml-files.
+
+- Some can be transformed in a asciidoc file and graphs by executing
+
+----
+python gen_dataval_report.py
+----
+
+- The resulting txt file can be made into a viewable document by using asciidoc
+(see http://www.methods.co.nz/asciidoc/ ) 
